@@ -1,10 +1,16 @@
+package dao;
+
 import com.rest.apidemo.dao.MySQLDbConnection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class MySQLDbConnectionShould {
+
+    private static final String CONNECTION_FAIL = "connection fail";
 
     @Test
     void connect_to_database_correctly() {
@@ -13,11 +19,15 @@ public class MySQLDbConnectionShould {
             MySQLDbConnection mysql = new MySQLDbConnection();
             Connection dbConnection = mysql.getDbConnection();
             if (dbConnection == null)
-                Assertions.fail("connection fail");
+                throwFileMessage();
         } catch (RuntimeException e) {
-            Assertions.fail("connection fail");
+            throwFileMessage();
         }
 
 
+    }
+
+    private static void throwFileMessage() {
+        fail(CONNECTION_FAIL);
     }
 }

@@ -1,4 +1,5 @@
-import com.google.gson.Gson;
+package rest;
+
 import com.google.gson.reflect.TypeToken;
 import com.rest.apidemo.helper.HttpRequestHandler;
 import com.rest.apidemo.model.Player;
