@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rest.apidemo.helper.HttpRequestHandler;
 import com.rest.apidemo.model.Player;
 import jakarta.ws.rs.core.MediaType;
 import org.assertj.core.api.Assertions;
@@ -26,12 +27,15 @@ public class PlayerResourceShould {
     private Gson gson;
     private HttpClient client;
     private HttpRequest.Builder requestBuilder;
+    private HttpRequestHandler handler;
 
     @BeforeEach
     void setUp() {
         gson = new Gson();
         client = HttpClient.newHttpClient();
         requestBuilder = HttpRequest.newBuilder();
+        handler = new HttpRequestHandler();
+
     }
 
     @Test
