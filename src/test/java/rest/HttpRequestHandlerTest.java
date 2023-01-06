@@ -15,6 +15,7 @@ public class HttpRequestHandlerTest {
         HttpResponse<String> response = requestHandler
                 .target("http://localhost:8080/apidemo-1.0-SNAPSHOT/api/")
                 .path("players")
+                .header("Authorization","Zm9vdGJhbGwtc2VydmljZQ==")
                 .GET()
                 .build();
         TypeToken<List<Player>> typeToken = new TypeToken<>() {};

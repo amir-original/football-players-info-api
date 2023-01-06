@@ -64,6 +64,12 @@ public class HttpRequestHandler implements HttpApi {
         return this;
     }
 
+    @Override
+    public HttpRequestHandler header(String key,String value) {
+        method = method.header(key, value);
+        return this;
+    }
+
     public <T> T getResponse(HttpResponse<String> response, Type responseType) {
         return gson.fromJson(response.body(), responseType);
     }

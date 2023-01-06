@@ -11,5 +11,6 @@ public interface HttpApi {
     HttpRequestHandler PUT(Object entity);
     HttpRequestHandler DELETE();
     HttpRequestHandler mediaType(String type);
+    HttpRequestHandler header(String key,String value);
 
 }
