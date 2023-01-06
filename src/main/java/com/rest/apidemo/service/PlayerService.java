@@ -10,4 +10,6 @@ public interface PlayerService {
     Player getPlayer(String name);
 
     void addPlayer(Player player);
+
+    void updatePlayer(long id, Player player);
 }

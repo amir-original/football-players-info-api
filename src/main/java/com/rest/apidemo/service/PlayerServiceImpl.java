@@ -32,4 +32,9 @@ public class PlayerServiceImpl implements PlayerService {
     public void addPlayer(Player player) {
         dao.addPlayer(player);
     }
+
+    @Override
+    public void updatePlayer(long id, Player player) {
+        dao.updatePlayer(id,player);
+    }
 }

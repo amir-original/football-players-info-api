@@ -3,16 +3,27 @@ package com.rest.apidemo.model;
 import java.util.Objects;
 
 public class Player {
-    public String name;
-    public Integer age;
-    public String nationality;
-    public String club;
-    public String position;
+
+    private int id;
+    private String name;
+    private Integer age;
+    private String nationality;
+    private String club;
+    private String position;
 
     public Player() {
     }
 
     public Player(String name, Integer age, String nationality, String club, String position) {
+        this.name = name;
+        this.age = age;
+        this.nationality = nationality;
+        this.club = club;
+        this.position = position;
+    }
+
+    public Player(int id, String name, Integer age, String nationality, String club, String position) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.nationality = nationality;
@@ -38,6 +49,14 @@ public class Player {
 
     public String getPosition() {
         return position;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
