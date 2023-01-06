@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatNoException;
+
 public class PlayerDAOShould {
 
     private PlayerDAOImpl dao;
@@ -33,6 +35,13 @@ public class PlayerDAOShould {
         List<Player> players = dao.getPlayers("barcelona");
         Assertions.assertThat(players).isNotNull();
         Assertions.assertThat(players).contains(getLevandoskiInfo());
+    }
+
+    @Test
+    void add_player() {
+        Player saka = new Player("saka", 21, "england", "arsenal", "forward");
+        assertThatNoException().isThrownBy(()-> dao.addPlayer(saka));
+
     }
 
     private static Player getLevandoskiInfo() {

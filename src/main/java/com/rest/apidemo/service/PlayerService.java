@@ -9,4 +9,5 @@ public interface PlayerService {
     List<Player> getPlayers(String club);
     Player getPlayer(String name);
 
+    void addPlayer(Player player);
 }

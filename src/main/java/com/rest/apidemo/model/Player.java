@@ -9,6 +9,9 @@ public class Player {
     public String club;
     public String position;
 
+    public Player() {
+    }
+
     public Player(String name, Integer age, String nationality, String club, String position) {
         this.name = name;
         this.age = age;

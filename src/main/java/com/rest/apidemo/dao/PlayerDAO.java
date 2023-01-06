@@ -8,4 +8,6 @@ public interface PlayerDAO {
     List<Player> getPlayers();
     List<Player> getPlayers(String club);
     Player getPlayer(String name);
+
+    void addPlayer(Player player);
 }
