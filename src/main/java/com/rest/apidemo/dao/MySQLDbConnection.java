@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class MySQLDbConnection {
 
     public Connection getDbConnection() {
-        String host = "jdbc:mysql://localhost:3306/football ";
+        String host = "jdbc:mysql://localhost:3306/football";
         String user = "amir";
         String pass = "@wsrmp1378";
         try {

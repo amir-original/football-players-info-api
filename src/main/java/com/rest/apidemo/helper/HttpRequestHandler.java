@@ -1,4 +1,5 @@
 package com.rest.apidemo.helper;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class HttpRequestHandler implements HttpApi {
     public HttpRequestHandler target(String baseUri) {
         uri = baseUri;
         try {
-             builder().uri(new URI(uri));
-             return this;
+            builder().uri(new URI(uri));
+            return this;
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -29,62 +30,68 @@ public class HttpRequestHandler implements HttpApi {
 
     @Override
     public HttpRequestHandler path(String endpoint) {
-         target(uri+endpoint);
-         return this;
+        target(uri + endpoint);
+        return this;
     }
 
     @Override
-    public HttpRequestHandler get() {
+    public HttpRequestHandler GET() {
         method = method.GET();
         return this;
     }
 
     @Override
-    public HttpRequestHandler post(Object entity) {
+    public HttpRequestHandler POST(Object entity) {
         method = method.POST(bodyPublisher(entity));
         return this;
     }
 
     @Override
-    public HttpRequestHandler put(Object entity) {
+    public HttpRequestHandler PUT(Object entity) {
         method.PUT(bodyPublisher(entity));
         return this;
     }
 
     @Override
-    public HttpRequestHandler delete() {
-       method = method.DELETE();
-       return this;
+    public HttpRequestHandler DELETE() {
+        method = method.DELETE();
+        return this;
     }
 
-    public <T> T getResponse(HttpResponse<String> response, Type responseType ){
-        return gson.fromJson(response.body(),responseType);
+    @Override
+    public HttpRequestHandler mediaType(String type) {
+        method = method.header("content-type", type);
+        return this;
     }
 
-    public HttpResponse<String> getHttpResponse(HttpRequest request){
+    public <T> T getResponse(HttpResponse<String> response, Type responseType) {
+        return gson.fromJson(response.body(), responseType);
+    }
+
+    public HttpResponse<String> getHttpResponse(HttpRequest request) {
         try {
-            return HttpClient.newHttpClient().send(request,HttpResponse.BodyHandlers.ofString());
+            return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public HttpResponse<String> build(){
+    public HttpResponse<String> build() {
         HttpRequest request = method.build();
         return getHttpResponse(request);
     }
 
-    private String toJson(Object entity){
+    private String toJson(Object entity) {
         return gson.toJson(entity);
     }
 
-    private HttpRequest.BodyPublisher bodyPublisher(Object entity){
+    private HttpRequest.BodyPublisher bodyPublisher(Object entity) {
         return HttpRequest.BodyPublishers.ofString(toJson(entity));
     }
 
-    private  HttpRequest.Builder builder() {
-       method = HttpRequest.newBuilder();
-       return method;
+    private HttpRequest.Builder builder() {
+        method = HttpRequest.newBuilder();
+        return method;
     }
 
 
