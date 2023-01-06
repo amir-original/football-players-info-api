@@ -12,4 +12,8 @@ public interface PlayerDAO {
 
     void addPlayer(Player player);
     void updatePlayer(long id,Player player) throws SQLException;
+
+    void deletePlayer(int id);
+
+    Player getPlayer(int id);
 }

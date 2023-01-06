@@ -1,4 +1,4 @@
-package com.rest.apidemo;
+package com.rest.apidemo.config;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

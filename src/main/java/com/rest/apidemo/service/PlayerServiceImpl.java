@@ -37,4 +37,9 @@ public class PlayerServiceImpl implements PlayerService {
     public void updatePlayer(long id, Player player) {
         dao.updatePlayer(id,player);
     }
+
+    @Override
+    public void deletePlayer(int id) {
+        dao.deletePlayer(id);
+    }
 }

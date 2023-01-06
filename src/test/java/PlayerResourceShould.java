@@ -110,6 +110,17 @@ public class PlayerResourceShould {
         assertThat(response.statusCode()).isEqualTo(HTTP_200);
     }
 
+    @Test
+    void send_delete_request_for_remove_player() throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest request = requestBuilder
+                .uri(new URI(BASE_URL + "players/7"))
+                .DELETE()
+                .build();
+        HttpResponse<String> response = getHttpResponse(request);
+
+        assertThat(response.statusCode()).isEqualTo(204);
+    }
+
     private HttpResponse<String> getHttpResponse(HttpRequest request) throws IOException, InterruptedException {
         return client.send(request, BodyHandlers.ofString());
     }

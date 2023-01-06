@@ -21,28 +21,27 @@ public class PlayerDAOShould {
     @Test
     void get_players() {
         List<Player> players = dao.getPlayers();
-        Assertions.assertThat(players).isNotNull();
+        assertThat(players).isNotNull();
     }
 
     @Test
     void get_player_with_name() {
         Player levandoski = dao.getPlayer("levandoski");
-        Assertions.assertThat(levandoski).isNotNull();
-        Assertions.assertThat(levandoski).isEqualTo(getLevandoskiInfo());
+        assertThat(levandoski).isNotNull();
+        assertThat(levandoski).isEqualTo(getLevandoskiInfo());
     }
 
     @Test
     void get_players_with_their_club() {
         List<Player> players = dao.getPlayers("barcelona");
-        Assertions.assertThat(players).isNotNull();
-        Assertions.assertThat(players).contains(getLevandoskiInfo());
+        assertThat(players).isNotNull();
+        assertThat(players).contains(getLevandoskiInfo());
     }
 
     @Test
     void add_player() {
         Player saka = new Player("saka", 21, "england", "arsenal", "forward");
         assertThatNoException().isThrownBy(()-> dao.addPlayer(saka));
-
     }
 
     @Test
@@ -51,6 +50,16 @@ public class PlayerDAOShould {
         assertThatNoException().isThrownBy(()-> dao.updatePlayer(3,player));
         Player mbappé = dao.getPlayer("Mbappé");
         assertThat(mbappé).isNotNull();
+    }
+
+    @Test
+    void delete_player() {
+        assertThatNoException().isThrownBy(()-> dao.deletePlayer(5));
+
+        Player player = dao.getPlayer(5);
+
+        assertThat(player).isNull();
+
     }
 
     private static Player getLevandoskiInfo() {

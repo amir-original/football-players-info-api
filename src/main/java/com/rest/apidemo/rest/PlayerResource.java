@@ -1,4 +1,4 @@
-package com.rest.apidemo;
+package com.rest.apidemo.rest;
 
 
 import com.rest.apidemo.dao.exceptions.RTSQLIntegrityConstraintViolationException;
@@ -16,6 +16,8 @@ import java.util.List;
 @Consumes("application/json")
 public class PlayerResource {
 
+    private static final int HTTP_200 = 200;
+    private static final int HTTP_403 = 403;
     private final PlayerService service;
 
     public PlayerResource() {
@@ -48,7 +50,7 @@ public class PlayerResource {
             response = Response.status(409).build();
         }
         catch (RuntimeSqlException e) {
-            response = Response.status(403).build();
+            response = Response.status(HTTP_403).build();
         }
         return response;
     }
@@ -56,12 +58,25 @@ public class PlayerResource {
     @PUT
     @Path("{id}")
     public Response updatePlayer(@PathParam("id") int id,Player player){
-        Response response = Response.status(200).build();
+        Response response = Response.status(HTTP_200).build();
         try {
             service.updatePlayer(id,player);
         }
         catch (RuntimeSqlException e) {
-            response = Response.status(403).build();
+            response = Response.status(HTTP_403).build();
+        }
+        return response;
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response deletePlayer(@PathParam("id") int id){
+        Response response = Response.status(204).build();
+        try {
+            service.deletePlayer(id);
+        }
+        catch (RuntimeSqlException e) {
+            response = Response.status(HTTP_403).build();
         }
         return response;
     }

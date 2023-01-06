@@ -101,6 +101,36 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     }
 
+    @Override
+    public void deletePlayer(int id) {
+        try {
+            PreparedStatement statement = sql("delete  from players where player_id=?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeSqlException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Player getPlayer(int id) {
+        Player player = null;
+        try {
+            PreparedStatement statement = sql("select * from players where player_id=?");
+            statement.setInt(1, id);
+            ResultSet set = statement.executeQuery();
+            while (set.next()) {
+                player = getPlayerInfoFromDb(set);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return player;
+    }
+
     private void fillPlayerInfo(Player player, PreparedStatement statement) throws SQLException {
         statement.setString(1, player.getName());
         statement.setInt(2, player.getAge());
